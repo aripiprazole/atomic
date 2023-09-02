@@ -1,7 +1,12 @@
 structure Atomic (a : Type) : Type where
-  value : IO.Ref a
+  private value : IO.Ref a
 
 namespace Atomic
+
+@[extern "lean_atomic_init"]
+opaque initAtomic : IO Unit
+
+builtin_initialize initAtomic
 
 inductive AtomicOrder where
   /--
